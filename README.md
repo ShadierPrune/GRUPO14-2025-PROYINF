@@ -7,6 +7,8 @@ Este es el repositorio del Grupo 14, cuyos integrantes son:
 -  Martín Alonso Grandon Coronado - 202373588-4 - pararlelo 201
 -  Felipe Santiago Parra Díaz - 202373568-k - pararlelo 200
 -  **Tutor**: Benjamín Daza
+-  **Profesor**: Ricardo Salas - paralelo 200
+-  **Profesora**: Luz Chourio - paralelo 201
 
 ## Wiki
 
