@@ -2,10 +2,10 @@
 
 Este es el repositorio del Grupo 14, cuyos integrantes son:
 
--  Matías García Silva - 202373599-k - pararlelo 200
--  Matías Vicente Rojas Nahuelcura - 202373617-1 - pararlelo 200
--  Martín Alonso Grandon Coronado - 202373588-4 - pararlelo 201
--  Felipe Santiago Parra Díaz - 202373568-k - pararlelo 200
+-  Matías García Silva - 202373599-k - paralelo 200
+-  Matías Vicente Rojas Nahuelcura - 202373617-1 - paralelo 200
+-  Martín Alonso Grandon Coronado - 202373588-4 - paralelo 201
+-  Felipe Santiago Parra Díaz - 202373568-k - paralelo 200
 -  **Tutor**: Benjamín Daza
 -  **Profesor**: Ricardo Salas - paralelo 200
 -  **Profesora**: Luz Chourio - paralelo 201
