@@ -2,25 +2,21 @@
 
 Este es el repositorio del Grupo 14, cuyos integrantes son:
 
-- Matias Garcia Silva - 202373599-k - par200
--  Matías Vicente Rojas Nahuelcura - 202373617-1 - p200
--  Martín Alonso Grandon Coronado - 202373588-4 - p201
--  Felipe Santiago Parra Díaz - 202373568-k - par200
+-  Matías García Silva - 202373599-k - pararlelo 200
+-  Matías Vicente Rojas Nahuelcura - 202373617-1 - pararlelo 200
+-  Martín Alonso Grandon Coronado - 202373588-4 - pararlelo 201
+-  Felipe Santiago Parra Díaz - 202373568-k - pararlelo 200
 -  **Tutor**: Benjamín Daza
 
 ## Wiki
-
-> Obtener enlace desde el home de la wiki del repo.
 
 Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/ShadierPrune/GRUPO14-2025-PROYINF/wiki)
 
 ## Videos
 
-> Reemplazar con los enlaces correspondientes
+* [Video presentación cliente](https://aula.usm.cl/pluginfile.php/7621199/mod_resource/content/2/video1352931478.mp4)
 
-* [Video presentación cliente](https://www.youtube.com)
-* [Video presentación avance 1](https://www.youtube.com/)
-* Etc ...
+Se podrá acceder al video del cliente suponiendo que tiene su cuenta de la USM iniciada, pues está dentro de AULA.
 
 ## Aspectos técnicos relevantes
 
