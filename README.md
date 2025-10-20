@@ -18,7 +18,9 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Shadie
 
 * [Video presentación cliente](https://aula.usm.cl/pluginfile.php/7621199/mod_resource/content/2/video1352931478.mp4)
 
-Se podrá acceder al video del cliente suponiendo que tiene su cuenta de la USM iniciada, pues está dentro de AULA.
+Se podrá acceder al video del cliente suponiendo que tiene su cuenta de la USM iniciada, pues está dentro de AULA
+* [Video Hito 3](https://drive.google.com/file/d/1kEOuHAIVFrE400mrRyK2SCqOSBCsE3Sf/view?usp=sharing)
+
 
 ## Aspectos técnicos relevantes
 
