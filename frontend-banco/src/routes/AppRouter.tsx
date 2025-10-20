@@ -14,7 +14,19 @@ export function AppRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/simulador" element={<Simulador />} />
-      <Route path="/contrato" element={<Contrato />} />
+      <Route
+        path="/contrato"
+        element={
+          <Contrato
+            onBack={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+            onSubmit={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        }
+      />
       <Route path="/form" element={<Form />} />
     </Routes>
   );
