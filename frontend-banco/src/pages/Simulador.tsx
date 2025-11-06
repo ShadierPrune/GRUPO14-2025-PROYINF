@@ -27,6 +27,10 @@ export default function Simulador() {
   const [plazo, setPlazo] = useState(24); // Plazo en meses
   const [taza, setTaza] = useState(1.5); // Tasa de interés mensual
   const [savedSimulations, setSavedSimulations] = useState<Simulation[]>([]); //guardar sim
+  const [totalPagado, setTotalPagado] = useState(0);
+  const [intereses, setIntereses] = useState(0);
+  const [cuota, setCuota] = useState(0); 
+  const [idSimulacion, setIdSimulacion] = useState('');
   const hoy = new Date();
   const mes = hoy.getMonth() + 1;
   const ano = hoy.getFullYear();
@@ -49,6 +53,8 @@ export default function Simulador() {
 
   const FechaFin = finPago(mes, ano, plazo);
 
+
+  /*
   // Calcular cuota mensual usando fórmula de amortización
   const tasaInteresEfectiva = taza / 100;
   const cuota =
@@ -60,6 +66,41 @@ export default function Simulador() {
 
   const totalPagado = cuota * plazo;
   const intereses = totalPagado - monto;
+  */
+
+  useEffect(() => {
+    if (monto <= 0 || plazo <= 0) return;
+
+    const API_URL = "http://localhost:4000/api/v1/simulacion";
+
+    const fetchSimulacion = async () => {
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+              monto: monto, 
+              plazo: plazo, 
+              taza: taza 
+          }),
+        });
+        if(!response.ok) {
+          throw new Error('Error al obtneer la simulación de la API.');
+        }
+        const data = await response.json();
+        setCuota(data.cuota_mensual);
+        setTotalPagado(data.total_pagado);
+        setIntereses(data.intereses_totales);
+        setIdSimulacion(data.id_simulacion);
+      } catch (error) {
+      console.error("Fallo la llamada a la API.", error);
+      }
+    };
+
+    fetchSimulacion();
+  }, [monto, plazo, taza]);
 
   const handleSaveSimulation = () => {
     const newSimulation: Simulation = {
