@@ -2,19 +2,23 @@
   "name": "api-simulacion",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js", 
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js", 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.19",
+    "cors": "^2.8.5",      
+    "express": "^5.1.0"         
+  },
   "devDependencies": {
     "@types/express": "^5.0.5",
     "@types/node": "^24.10.0",
-    "express": "^5.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
