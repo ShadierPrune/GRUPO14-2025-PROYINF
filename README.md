@@ -16,9 +16,14 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Shadie
 
 ## Videos
 
+Se podrá acceder al video del cliente suponiendo que tiene su cuenta de la USM iniciada, pues está dentro de AULA
+
 * [Video presentación cliente](https://aula.usm.cl/pluginfile.php/7621199/mod_resource/content/2/video1352931478.mp4)
 
-Se podrá acceder al video del cliente suponiendo que tiene su cuenta de la USM iniciada, pues está dentro de AULA.
+El video del Hito 3 representa el escenario en el que un potencial cliente realiza la simulación de un préstamo, y decide solicitarlo, rellenando el formulario los con datos correspondientes. Luego de que su solicitud sea aprobada, el cliente deberá firmar los documentos correspondientes con la firma digital. Cuando se complete la firma de documentos de forma correcta, se generará el crédito en el sistema y luego el usuario podrá visualizarlo.
+
+* [Video Hito 3](https://drive.google.com/file/d/1kEOuHAIVFrE400mrRyK2SCqOSBCsE3Sf/view?usp=sharing)
+
 
 ## Aspectos técnicos relevantes
 

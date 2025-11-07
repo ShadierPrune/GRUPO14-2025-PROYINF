@@ -1,0 +1,40 @@
+src/
+├── assets/                # Imágenes, íconos, fuentes, etc.
+│   └── logo.svg
+│
+├── components/            # Componentes reutilizables
+│   ├── ui/                # Botones, inputs, modales, alerts (shadcn/ui)
+│   ├── layout/            # Header, Footer, Navbar, Sidebar
+│   └── common/            # Componentes pequeños reutilizables (Loader, Card, etc.)
+│
+├── layouts/               # Layouts generales
+│   └── MainLayout.tsx     # Layout principal (header + footer + outlet)
+│
+├── pages/                 # Vistas de tu aplicación
+│   ├── Home.tsx
+│   ├── Login.tsx
+│   ├── Register.tsx
+│   ├── Simulador.tsx
+│   ├── Contrato.tsx
+│   └── Form.tsx
+│
+├── routes/                # Configuración de rutas
+│   └── AppRouter.tsx
+│
+├── context/               # Contextos globales (auth, theme, etc.)
+│   └── AuthContext.tsx
+│
+├── hooks/                 # Hooks personalizados
+│   └── useAuth.ts
+│
+├── lib/                   # Configuración de librerías externas
+│   └── axios.ts             # Configuración central de Axios
+│   └──utils.ts
+│
+├── styles/                # Estilos globales
+│   ├── globals.css
+│   └── variables.css
+│
+├── App.tsx                # Componente raíz que monta el router
+├── main.tsx               # Punto de entrada de la aplicación
+└── vite-env.d.ts
