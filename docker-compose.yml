@@ -4,6 +4,8 @@ services:
     build: .
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     environment:
       - DB_HOST=postgres_db
       - DB_PORT=5432
