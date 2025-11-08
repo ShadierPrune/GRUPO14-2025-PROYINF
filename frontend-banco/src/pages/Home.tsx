@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import React from "react";
 
 // --- Iconos Sencillos para la UI (puedes reemplazarlos con una librería como lucide-react) ---
@@ -221,53 +222,56 @@ export default function Home() {
   const userData = MOCK_USER_DATA;
 
   return (
-    <div className="bg-slate-50 flex justify-center min-h-screen font-sans p-4 sm:p-6">
-      <div className="w-full max-w-4xl">
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800">
-            ¡Hola, {userData.name}!
-          </h1>
-          <p className="text-gray-500 text-lg">
-            Bienvenido/a a tu portal de cliente.
-          </p>
-        </header>
+    <div className="flex flex-col min-h-screen">
+      <Header></Header>
+      <div className="bg-slate-50 flex justify-center min-h-screen font-sans p-4 sm:p-6">
+        <div className="w-full max-w-4xl">
+          <header className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-800">
+              ¡Hola, {userData.name}!
+            </h1>
+            <p className="text-gray-500 text-lg">
+              Bienvenido/a a tu portal de cliente.
+            </p>
+          </header>
 
-        <main className="space-y-8">
-          {/* Sección de Crédito Activo: solo se muestra si existe */}
-          {userData.activeCredit && (
-            <ActiveCreditCard credit={userData.activeCredit} />
-          )}
+          <main className="space-y-8">
+            {/* Sección de Crédito Activo: solo se muestra si existe */}
+            {userData.activeCredit && (
+              <ActiveCreditCard credit={userData.activeCredit} />
+            )}
 
-          {/* Sección de Solicitudes: solo se muestra si hay una solicitud actual */}
-          {userData.currentApplication && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 text-left">
-                Estado de tu Última Solicitud
-              </h2>
-              <ApplicationStatusCard
-                application={userData.currentApplication}
-              />
-            </div>
-          )}
-
-          {/* Sección de "Call to Action": se muestra si no hay una solicitud en curso */}
-          {!userData.currentApplication && (
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                ¿Necesitas financiamiento?
-              </h2>
-              <p className="text-gray-600 max-w-md mx-auto">
-                Comienza una nueva solicitud de crédito en pocos minutos y obtén
-                una respuesta rápida.
-              </p>
-              <div className="mt-6">
-                <button className="px-8 py-3 rounded-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-600 transition-all">
-                  Solicitar un Nuevo Crédito
-                </button>
+            {/* Sección de Solicitudes: solo se muestra si hay una solicitud actual */}
+            {userData.currentApplication && (
+              <div>
+                <h2 className="text-2xl font-bold text-gray-800 mb-4 text-left">
+                  Estado de tu Última Solicitud
+                </h2>
+                <ApplicationStatusCard
+                  application={userData.currentApplication}
+                />
               </div>
-            </div>
-          )}
-        </main>
+            )}
+
+            {/* Sección de "Call to Action": se muestra si no hay una solicitud en curso */}
+            {!userData.currentApplication && (
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center">
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                  ¿Necesitas financiamiento?
+                </h2>
+                <p className="text-gray-600 max-w-md mx-auto">
+                  Comienza una nueva solicitud de crédito en pocos minutos y
+                  obtén una respuesta rápida.
+                </p>
+                <div className="mt-6">
+                  <button className="px-8 py-3 rounded-lg font-semibold text-white bg-yellow-500 hover:bg-yellow-600 transition-all">
+                    Solicitar un Nuevo Crédito
+                  </button>
+                </div>
+              </div>
+            )}
+          </main>
+        </div>
       </div>
     </div>
   );
