@@ -21,6 +21,15 @@ services:
       - /app/ocr-service
       - ./scoring-frontend:/app/scoring-frontend
 
+  api-simulacion:
+    build: ./api-simulacion 
+    ports:
+      - "4000:3000" 
+    restart: always
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+
   frontend:
     build:
       context: ./frontend-banco
@@ -31,8 +40,10 @@ services:
       - /app/node_modules
     environment:
       - VITE_API_URL=http://localhost:3000/api
+      - VITE_API_SIMULACION_URL=http://api-simulacion:3000/api/v1
     depends_on:
       - app
+      - api-simulacion
 
   ocr-service:
     build:

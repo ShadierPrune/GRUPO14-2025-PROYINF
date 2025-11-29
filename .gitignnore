@@ -1,0 +1,7 @@
+node_modules
+/frontend-banco/node_modules
+/auth-api/node_modules
+/api-simulacion/node_modules
+/ocr-api/node_modules
+/auth-api/.env
+
