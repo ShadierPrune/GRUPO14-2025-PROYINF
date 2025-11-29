@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor de Riesgo</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; padding-top: 40px; }
+        .container { width: 400px; }
+        
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; margin-top: 0; }
+        
+        .form-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 6px; outline: none; }
+        button { padding: 12px 20px; background-color: #2c3e50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #1a252f; }
+
+        .result-box { margin-top: 20px; display: none; animation: fadeIn 0.5s; }
+        
+        .status-badge { display: block; text-align: center; padding: 10px; border-radius: 6px; color: white; font-weight: bold; font-size: 1.2em; margin-bottom: 15px; }
+        .APROBADO { background-color: #27ae60; }
+        .RECHAZADO { background-color: #c0392b; }
+
+        .details { font-size: 0.9em; color: #555; }
+        .detail-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
+        .detail-row strong { color: #333; }
+        
+        .score-display { text-align: center; font-size: 2em; font-weight: bold; margin: 10px 0; color: #2c3e50; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h2>🏦 Evaluación Crediticia</h2>
+            <div class="form-group">
+                <input type="text" id="rutInput" placeholder="Ingrese RUT (ej: 1-1, 2-2)">
+                <button onclick="evaluar()">Evaluar</button>
+            </div>
+
+            <div id="loading" style="text-align:center; display:none; color:#666;">Calculando riesgo...</div>
+
+            <div id="resultado" class="result-box">
+                <div id="estadoBadge" class="status-badge"></div>
+                
+                <div class="score-display">
+                    Score: <span id="scoreVal"></span> / 1000
+                </div>
+
+                <div class="details">
+                    <h3>Datos Financieros</h3>
+                    <div class="detail-row"><span>Nombre:</span> <strong id="resNombre"></strong></div>
+                    <div class="detail-row"><span>Ingreso Mensual:</span> <strong id="resIngreso"></strong></div>
+                    <div class="detail-row"><span>Deuda Total:</span> <strong id="resDeuda"></strong></div>
+                    <div class="detail-row"><span>Antigüedad:</span> <strong id="resAntiguedad"></strong></div>
+                    <div class="detail-row"><span>Morosidad:</span> <strong id="resMorosidad"></strong></div>
+                    
+                    <h3>Análisis del Motor</h3>
+                    <ul id="resDetalles" style="padding-left: 20px; margin-top: 5px;"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; font-size: 0.8em; color: #888; text-align: center;">
+            <p>RUTs de prueba: <strong>1-1</strong> (Ideal), <strong>2-2</strong> (Endeudado), <strong>3-3</strong> (Dicom)</p>
+        </div>
+    </div>
+
+    <script>
+        const formatMoney = (num) => '$ ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        async function evaluar() {
+            const rut = document.getElementById('rutInput').value;
+            const resBox = document.getElementById('resultado');
+            const loading = document.getElementById('loading');
+            
+            resBox.style.display = 'none';
+            loading.style.display = 'block';
+
+            try {
+                const response = await fetch(`/api/scoring/${rut}`);
+                const data = await response.json();
+                
+                loading.style.display = 'none';
+                resBox.style.display = 'block';
+
+                if (!response.ok) {
+                    alert(data.error || 'Error al consultar');
+                    resBox.style.display = 'none';
+                    return;
+                }
+
+                document.getElementById('estadoBadge').innerText = data.analisis.estado;
+                document.getElementById('estadoBadge').className = 'status-badge ' + data.analisis.estado;
+                document.getElementById('scoreVal').innerText = data.analisis.score;
+
+                document.getElementById('resNombre').innerText = data.cliente.nombre;
+                document.getElementById('resIngreso').innerText = formatMoney(data.cliente.ingreso);
+                document.getElementById('resDeuda').innerText = formatMoney(data.cliente.deuda);
+                document.getElementById('resAntiguedad').innerText = data.cliente.antiguedad + ' meses';
+                
+                const morosidadEl = document.getElementById('resMorosidad');
+                morosidadEl.innerText = data.cliente.morosidad ? 'SÍ (VIGENTE)' : 'No registra';
+                morosidadEl.style.color = data.cliente.morosidad ? 'red' : 'green';
+
+                const lista = document.getElementById('resDetalles');
+                lista.innerHTML = '';
+                data.analisis.detalles.forEach(d => {
+                    const li = document.createElement('li');
+                    li.innerText = d;
+                    lista.appendChild(li);
+                });
+
+            } catch (error) {
+                console.error(error);
+                loading.style.display = 'none';
+                alert('Error de conexión con el servidor');
+            }
+        }
+    </script>
+</body>
+</html>

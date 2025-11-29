@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Cédula de Identidad</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
+        .container { padding: 2rem; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input[type="file"] { margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Extraer datos de Cédula</h1>
+        <p>Sube una imagen de la cédula para rellenar los datos automáticamente.</p>
+        <form id="upload-form"> 
+            <input type="file" name="imagenCedula" id="file-input" accept="image/*" required>
+            <button type="submit">Procesar Imagen</button>
+        </form>
+
+        <div id="resultado-container" class="hidden">
+            <h2>Texto Extraído:</h2>
+            <pre id="resultado-texto"></pre>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const fileInput = document.getElementById('file-input');
+        const resultadoContainer = document.getElementById('resultado-container');
+        const resultadoTexto = document.getElementById('resultado-texto');
+
+        form.addEventListener('submit', async (event) => {
+            
+            event.preventDefault();
+
+            // Quitamos el hidden y ostramos un mensaje de "procesando..." 
+            resultadoContainer.classList.remove('hidden');
+            resultadoTexto.classList.remove('error');
+            resultadoTexto.textContent = 'Procesando imagen...';
+
+            const formData = new FormData();
+            formData.append('imagenCedula', fileInput.files[0]);
+
+            try {
+                //Enviamos los datos a /upload
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                //Convertimos la respuesta del servidor de JSON a un objeto de JavaScript
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Si todo salio bien, mostramos el texto extraido en el <pre>
+                    const resultado = data.resultado;
+                    let textoFormateado = '';
+                    for (const [etiqueta, valor] of Object.entries(resultado)) {
+                        textoFormateado += `${etiqueta}: ${valor}\n`;
+                    }
+    
+                    resultadoTexto.textContent = textoFormateado;
+
+                } else {
+                    // Si el servidor respondió con un error, mostramos el mensaje de error
+                    throw new Error(data.error || 'Ocurrió un error desconocido.');
+                }
+
+            } catch (error) {
+                //Si hubo un error lo mostramos aquí
+                resultadoContainer.classList.remove('hidden');
+                resultadoTexto.classList.add('error');
+                resultadoTexto.textContent = `Error: ${error.message}`;
+                console.error('Error al subir el archivo:', error);
+            }
+        });
+    </script>
+</body>
+</html>
