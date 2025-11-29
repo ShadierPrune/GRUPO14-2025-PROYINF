@@ -1,38 +1,21 @@
-// services/ocr.service.js
+// src/services/ocr.service.js
 import axios from "axios";
+import FormData from "form-data";
 
-const OCR_URL = process.env.OCR_URL || "http://api-ocr:3000";
+const OCR_SERVICE_URL =
+  process.env.OCR_SERVICE_URL || "http://ocr-service:4000";
 
-export async function callOcrAPI(req, res, path, method = "POST") {
-  try {
-    const url = `${OCR_URL}${path}`;
-    if (!req.file) {
-      return res.status(400).json({ error: "No se subió ninguna imagen" });
-    }
+export const procesarImagenOCR = async (file) => {
+  const form = new FormData();
 
-    // Convertimos el buffer a base64, como hace tu microservicio
-    const fileBuffer = req.file.buffer;
-    const mimeType = req.file.mimetype;
-    const encodedImage = fileBuffer.toString("base64");
+  form.append("imagenCedula", file.buffer, {
+    filename: file.originalname,
+    contentType: file.mimetype,
+  });
 
-    // Llamada HTTP al microservicio OCR
-    const response = await axios.post(
-      url,
-      {
-        imagenCedula: encodedImage,
-        mimeType,
-      },
-      { validateStatus: () => true }
-    );
+  const response = await axios.post(`${OCR_SERVICE_URL}/process`, form, {
+    headers: form.getHeaders(),
+  });
 
-    res.status(response.status).json(response.data);
-  } catch (error) {
-    console.error(
-      `❌ Error al comunicar con api-ocr (${path}):`,
-      error.message
-    );
-    res.status(500).json({
-      error: "Error comunicando con el microservicio de OCR",
-    });
-  }
-}
+  return response.data.resultado;
+};
