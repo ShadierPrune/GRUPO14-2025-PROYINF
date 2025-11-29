@@ -6,7 +6,6 @@ import Register from "../pages/Register";
 import Simulador from "../pages/Simulador";
 import Contrato from "../pages/Contrato";
 import Form from "../pages/Form";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export function AppRouter() {
   return (
@@ -15,38 +14,11 @@ export function AppRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/simulador" element={<Simulador />} />
-
-      {/* rutas protegidas */}
-      <Route
-        path="/form"
-        element={
-          <ProtectedRoute>
-            <Form />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/form" element={<Form />} />
+      <Route path="/" element={<Home />} />
       <Route
         path="/contrato"
-        element={
-          <ProtectedRoute>
-            <Contrato
-              onBack={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-              onSubmit={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
-          </ProtectedRoute>
-        }
+        element={<Contrato onBack={() => {}} onSubmit={() => {}} />}
       />
     </Routes>
   );

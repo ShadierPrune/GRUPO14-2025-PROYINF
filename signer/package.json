@@ -1,0 +1,18 @@
+{
+  "name": "signer",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^4.21.2",
+    "nodemailer": "^6.9.1",
+    "pdf-lib": "^1.17.1",
+    "pg": "^8.15.6",
+    "uuid": "^9.0.0"
+  }
+}
