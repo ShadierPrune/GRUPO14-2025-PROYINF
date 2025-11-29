@@ -24,6 +24,8 @@ El video del Hito 3 representa el escenario en el que un potencial cliente reali
 
 * [Video Hito 3](https://drive.google.com/file/d/1kEOuHAIVFrE400mrRyK2SCqOSBCsE3Sf/view?usp=sharing)
 
+* [Video final Hito 5](https://drive.google.com/file/d/1myNxiwDz660ZsodgQNNnMfrAup6DUsq_/view?usp=sharing)
+
 
 ## Aspectos técnicos relevantes
 
